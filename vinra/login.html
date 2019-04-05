@@ -1,0 +1,279 @@
+<!DOCTYPE>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" keyword="RICOH, multifunctions, copiers, scanners">
+        <title>VinRa</title>
+        <link rel="shortcut icon" href="Images/favi-icon.ico" type="image/x-icon">
+        <link type="text/css" rel="stylesheet" href="css/bootstrap.min.css" />
+        <link type="text/css" rel="stylesheet" href="css/font-awesome.min.css" />
+        <!-- <link type="text/css" rel="stylesheet" href="css/animation.css" /> -->
+        <link type="text/css" rel="stylesheet" href="css/my-style.css" />
+        <script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
+        <script type="text/javascript" src="js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="js/jssor.slider.mini.js"></script>
+        <script type="text/javascript" src="js/mycustom.js"></script>
+
+    </head>
+<body>
+    <!-- Start Top Header_Area -->
+    <section class="top-header">
+        <div class="container top-header">
+            <ul style="padding: 10px 0px 0px 0px; float: right;">
+                <li>
+                    <a href="#">
+                        <i class="fa fa-phone"></i>+91-999-9999-999</a>
+                </li>
+                <li>
+                    <a href="#">
+                        <i class="fa fa-envelope-o"></i> info@vinra.co.in</a>
+                </li>
+                <li>
+                	<div class="cart_div">
+					<a href="cart.php"><img src="Images/cart-icon.png"/> Cart<span>1</span></a>
+					</div>
+                </li>
+
+            </ul>
+            
+        </div>
+    </section>
+
+    <!-- End Top Header_Area -->
+
+    <div class="container-fluid">
+        <div class="container">
+            <nav class="navbar navbar-default pad-top5 mar-bott5" data-spy="affix" data-offset-top="150" role="navigation">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <div class="navbar-brand logo-height">
+                        <a href="index.html">
+                            <img alt="logo" src="Images/logo.png" class="img-responsive logo-img" />
+                        </a>
+                    </div>
+                </div>
+                <div class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav navbar-right pad-top10">
+                        <li>
+                            <a href="index.html">Home</a>
+                        </li>
+                        <li>
+                            <a href="about-us.html">About Us</a>
+                        </li>
+                       
+                        <li>
+                            <a href="services.html">Services</a>
+                        </li>
+                        <li>
+                            <a href="#">Online Books</a>
+                        </li>
+                         <li>
+                            <a href="#">Edu Tab</a>
+                        </li>
+                        <li>
+                            <a href="contact-us.html">Contact Us</a>
+                        </li>
+                         <li>
+                            <a href="#"><i class="fa fa-user-circle"></i> Login</a>
+                        </li>
+                    </ul>
+
+                </div>
+            </nav>
+        </div>
+    </div>
+
+
+
+
+<div class="container-fluid" style="background-color: #ccc;">
+<div class="container" >
+   <div class="row pad-top40 pad-bott40">
+    <div class="col-md-6 col-md-offset-3">
+      <div class="panel panel-login ">
+        <div class="panel-body">
+          <div class="row">
+            <div class="col-lg-12">
+              <form id="login-form" action="#" method="post" role="form" style="display: block;">
+                <h2>LOGIN</h2>
+                  <div class="form-group">
+                    <input type="text" name="username" id="username" tabindex="1" class="form-control" placeholder="Username" value="">
+                  </div>
+                  <div class="form-group">
+                    <input type="password" name="password" id="password" tabindex="2" class="form-control" placeholder="Password">
+                  </div>
+                  <div class="col-xs-6 form-group pull-left checkbox">
+                    <input id="checkbox1" type="checkbox" name="remember">
+                    <label for="checkbox1">Remember Me</label>   
+                  </div>
+                  <div class="col-xs-6 form-group pull-right">     
+                        <input type="submit" name="login-submit" id="login-submit" tabindex="4" class="form-control btn btn-login" value="Log In">
+                  </div>
+              </form>
+              <form id="register-form" action="#" method="post" role="form" style="display: none;">
+                <h2>REGISTER</h2>
+                  <div class="form-group">
+                    <input type="text" name="username" id="username" tabindex="1" class="form-control" placeholder="Username" value="">
+                  </div>
+                  <div class="form-group">
+                    <input type="email" name="email" id="email" tabindex="1" class="form-control" placeholder="Email Address" value="">
+                  </div>
+                  <div class="form-group">
+                    <input type="password" name="password" id="password" tabindex="2" class="form-control" placeholder="Password">
+                  </div>
+                  <div class="form-group">
+                    <input type="password" name="confirm-password" id="confirm-password" tabindex="2" class="form-control" placeholder="Confirm Password">
+                  </div>
+                  <div class="form-group">
+                    <div class="row">
+                      <div class="col-sm-6 col-sm-offset-3">
+                        <input type="submit" name="register-submit" id="register-submit" tabindex="4" class="form-control btn btn-register" value="Register Now">
+                      </div>
+                    </div>
+                  </div>
+              </form>
+            </div>
+          </div>
+        </div>
+        <div class="panel-heading">
+          <div class="row">
+            <div class="col-xs-6 tabs">
+              <a href="#" class="active" id="login-form-link"><div class="login">LOGIN</div></a>
+            </div>
+            <div class="col-xs-6 tabs">
+              <a href="#" id="register-form-link"><div class="register">REGISTER</div></a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+
+
+
+
+
+
+    <!-- footer start -->
+    <div class="container-fluid footer-bg">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 col-md-4 col-sm-12">
+                    <h4>ABOUT THE COMPANY</h4>
+                    <a href="index.html">
+                        <!-- <img src="Images/logo.png" width="90px" height="80px" /> -->
+                    </a>
+                    <p>We are in the publishing business here at VinRa. Our company has gath­ered together people who are all focused on a common purpose. The company was founded in 2011, over these years, the company has earned a reputation that has a unique combination of quality, value, trust and reliability. </p>
+
+                </div>
+
+                <div class="col-lg-4 col-md-4 col-sm-12">
+                    <h4>USEFUL LINKS</h4>
+                    <p>
+                        <a href="index.html" class="fa fa-arrow-right"> &nbsp;Home</a>
+                    </p>
+                    <p>
+                        <a href="about-us.html" class="fa fa-arrow-right"> &nbsp;About Us</a>
+                    </p>
+                    
+                    <p>
+                        <a href="services.html" class="fa fa-arrow-right"> &nbsp;Services</a>
+
+                    </p>
+                    <p>
+                        <a href="services.html" class="fa fa-arrow-right"> &nbsp;Online Books</a>
+
+                    </p>
+
+                    <p>
+                        <a href="products.html" class="fa fa-arrow-right"> &nbsp;Edu Tab</a>
+                    </p>
+                    <p>
+                        <a href="contact-us.html" class="fa fa-arrow-right"> &nbsp;Contact Us</a>
+                    </p>
+
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-12">
+                    <h4>GET IN TOUCH</h4>
+                    <i class="fa fa-2x fa-map-marker" style="position:absolute; color:#c03848;"></i>
+                    <p style="line-height:1.5em; position:relative; z-index:226; padding-left:40px;">
+                        <a href="#">abc, <br /> abc Nagar, </a>
+                        <a href="#">abc-99999, UP (India)</a>
+                    </p>
+                    <i class="fa fa-2x fa-phone" style="position:absolute; color:#c03848;"></i>
+                    <p style="color:#CCC; line-height:1.5em; position:relative; z-index:226; padding-left:40px;">
+                        <a href="#">000-99-999-99</a>
+                        <br/>
+                        <a href="#">9900-999-999</a>
+                    </p>
+                    <i class="fa fa-2x fa-envelope" style="position:absolute; color:#c03848;"></i>
+                    <p style="line-height:1.5em; position:relative; z-index:226; padding-left:40px;">
+                        <a href="#">info@vinra.co.in &nbsp;</a>
+                        <br/>
+                        <a href="#">www.vinra.co.in</a>
+                    </p>
+                </div>
+            </div>
+
+
+
+        </div>
+
+    </div>
+    <div class="container-fluid bottom-copyright">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12 text">Copyright &copy; 2019
+                    <span class="text">
+                        <a class="anchor" href="#">VinRa</a>
+                    </span>
+                </div>
+                <!-- <div class="col-lg-4 col-md-8 col-sm-4 mar-top5" style="text-align:right;">
+            <a href="https://www.facebook.com/login/"><i class="fa fa-2x fa-facebook-square"></i></a>
+            &nbsp;<a href="https://twitter.com/login?lang=en"><i class="fa fa-2x fa-twitter-square"></i></a>
+            &nbsp;<a href="https://plus.google.com/discover"><i class="fa fa-2x fa-google-plus-square"></i></a>
+            &nbsp;<a href="https://www.youtube.com/"><i class="fa fa-2x fa-youtube-square"></i></a>
+            </div> -->
+            </div>
+        </div>
+    </div>
+    <button onclick="topFunction()" id="myBtn" title="Go to top">
+        <i class="fa fa-arrow-up"></i>
+    </button>
+
+
+<script>
+    $(function() {
+    $('#login-form-link').click(function(e) {
+        $("#login-form").delay(100).fadeIn(100);
+        $("#register-form").fadeOut(100);
+        $('#register-form-link').removeClass('active');
+        $(this).addClass('active');
+        e.preventDefault();
+    });
+    $('#register-form-link').click(function(e) {
+        $("#register-form").delay(100).fadeIn(100);
+        $("#login-form").fadeOut(100);
+        $('#login-form-link').removeClass('active');
+        $(this).addClass('active');
+        e.preventDefault();
+    });
+
+});
+
+</script>
+
+
+
+
+
+</body>
+
+</html>
