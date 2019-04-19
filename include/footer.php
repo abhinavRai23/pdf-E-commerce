@@ -13,10 +13,10 @@
     <!-- /#wrapper -->
 
     <!-- jQuery -->
-    <script src="js/jquery.js"></script>
+    <script src="<?php echo 'http://'.$_SERVER['HTTP_HOST'].'/vinra/js/jquery.js'; ?>" ></script>
 
     <!-- Bootstrap Core JavaScript -->
-    <script src="js/bootstrap.min.js"></script>
+    <script src="<?php echo 'http://'.$_SERVER['HTTP_HOST'].'/vinra/js/bootstrap.min.js'; ?>" ></script>
 
 </body>
 
