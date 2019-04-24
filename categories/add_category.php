@@ -18,9 +18,9 @@
         }
     }
 ?>
-<h1 class="page-header">
+<div class="page-header">
     Add Category
-</h1>
+</div>
 <div class="col-md-4 col-md-offset-4">
     <div class="panel panel-default">
         <!-- /.panel-heading -->

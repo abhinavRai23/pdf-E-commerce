@@ -229,3 +229,8 @@ ul.alert-dropdown {
 .btn{
     padding: 4px 8px;
 }
+
+.page-header{
+    font-size: 28px;
+    margin: 0 0 15px 0;
+}

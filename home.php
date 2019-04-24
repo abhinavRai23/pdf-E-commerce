@@ -1,10 +1,10 @@
 <?php
 include "include/header.php";
 ?>
-<h1 class="page-header">
+<div class="page-header">
     Welcome
     <small>This is Admin Panel</small>
-</h1>
+</div>
 <h3>
 	<p>
 		Choose side links for requirements.....

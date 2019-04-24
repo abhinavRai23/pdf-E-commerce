@@ -36,7 +36,7 @@
                         <a href="#">View Books</a>
                     </li>
                     <li>
-                        <a href="#">Add Book</a>
+                        <a href="<?php echo 'http://'.$_SERVER['HTTP_HOST'].'/vinra/books/add_book.php';?>" >Add Book</a>
                     </li>
                 </ul>
             </li>

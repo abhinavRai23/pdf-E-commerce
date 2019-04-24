@@ -1,9 +1,9 @@
 <?php
     include "../include/header.php";
 ?>
-<h1 class="page-header">
+<div class="page-header">
     All User
-</h1>
+</div>
 
 <div class="panel panel-default">
     <!-- /.panel-heading -->

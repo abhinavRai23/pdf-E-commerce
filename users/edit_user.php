@@ -2,9 +2,9 @@
     ob_start();
     include "../include/header.php";
 ?>
-<h1 class="page-header">
+<div class="page-header">
     Edit User Details
-</h1>
+</div>
 <div class="col-md-4 col-md-offset-4">
     <div class="panel panel-default">
         <!-- /.panel-heading -->
