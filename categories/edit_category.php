@@ -1,5 +1,4 @@
 <?php
-    ob_start();
     include "../include/header.php";
 ?>
 <div class="page-header">

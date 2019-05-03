@@ -1,6 +1,7 @@
 <?php
 include "connect.inc.php";
 include "session.php";
+ob_start();
 
 function mysql_entities_fix_string($db_server,$string)
 {

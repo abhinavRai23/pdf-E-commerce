@@ -33,7 +33,7 @@
                 </a>
                 <ul class="collapse list-unstyled" id="bookMenu">
                     <li>
-                        <a href="#">View Books</a>
+                        <a href="<?php echo 'http://'.$_SERVER['HTTP_HOST'].'/vinra/books/view_books.php';?>" >View Books</a>
                     </li>
                     <li>
                         <a href="<?php echo 'http://'.$_SERVER['HTTP_HOST'].'/vinra/books/add_book.php';?>" >Add Book</a>
@@ -55,21 +55,12 @@
                 <a href="#categoryPayment" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Payments <i class="fa fa-caret-down pull-right"></i></a>
                 <ul class="collapse list-unstyled" id="categoryPayment">
                     <li>
-                        <a href="#">View Payments</a>
+                        <a href="<?php echo 'http://'.$_SERVER['HTTP_HOST'].'/vinra/payments/view_payments.php';?>" >View Payments</a>
                     </li>
                     <li>
-                        <a href="#">Add Payment</a>
-                    </li>
-                    <li>
-                        <a href="#">Edit Payment</a>
-                    </li>
-                    <li>
-                        <a href="#">Delete Payment</a>
+                        <a href="<?php echo 'http://'.$_SERVER['HTTP_HOST'].'/vinra/payments/add_payment.php';?>" >Add Payment</a>
                     </li>
                 </ul>
-            </li>
-            <li>
-                <a href="">Item in Carts</a>
             </li>
         </ul>
     </div>
