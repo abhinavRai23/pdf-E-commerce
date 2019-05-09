@@ -40,6 +40,7 @@
 <?php
     if( isset($_POST["title"])
         && isset($_POST["author"])
+        && isset($_POST["publisher_name"])
         && isset($_POST["isbn"])
         && isset($_FILES["poster"])
         && isset($_POST["category_id"])
@@ -52,6 +53,7 @@
     {
         $title = mysql_entities_fix_string($db_server, $_POST["title"]);
         $author = mysql_entities_fix_string($db_server, $_POST["author"]);
+        $publisher_name = mysql_entities_fix_string($db_server, $_POST["publisher_name"]);
         $isbn = mysql_entities_fix_string($db_server, $_POST["isbn"]);
         $poster = mysql_entities_fix_string($db_server, $_FILES["poster"]["name"]);
         $category_id = mysql_entities_fix_string($db_server, $_POST["category_id"]);
@@ -75,7 +77,8 @@
         }
 
         if($file_error==0){
-            $query = "INSERT into books (title, author, isbn, poster, category_id, book_desc, published_date, sample_pdf_book, price, pdf_book, no_of_pages) values ( '$title', '$author', '$isbn', '$poster', '$category_id', '$book_desc', '$published_date', '$sample_pdf_book', '$price', '$pdf_book', '$no_of_pages' )";
+            $query = "INSERT into books (title, author, publisher_name, isbn, poster, category_id, book_desc, published_date, sample_pdf_book, price, pdf_book, no_of_pages) values ( '$title', '$author', '$publisher_name', '$isbn', '$poster', '$category_id', '$book_desc', '$published_date', '$sample_pdf_book', '$price', '$pdf_book', '$no_of_pages' )";
+            var_dump($query);
             
             $run = mysqli_query($db_server, $query);
 
@@ -83,7 +86,7 @@
             else{
                 header("location:view_books.php");
             }
-        }
+        }   
     }
 ?>
 
@@ -103,13 +106,16 @@
                         Author*:<input class="form-control" placeholder="Author Name" value="" name="author" type="varchar" required>
                     </div>
                     <div class="col-md-6 form-group">
+                        Publisher Name*:<input class="form-control" placeholder="Publisher Name" value="" name="publisher_name" type="varchar" required>
+                    </div>
+                    <div class="col-md-6 form-group">
                         ISBN:<input class="form-control" placeholder="ISBN code" value="" name="isbn" type="number" required>
                     </div>
                     <div class="col-md-6 form-group">
                         Choose Category:<select class="form-control" value="" name="category_id" type="select" required>
                             <option value="" disabled>Choose</option>
                             <?php
-                                $query = "SELECT * FROM `categories`";
+                                $query = "SELECT * FROM `categories` where parent_category!=0";
                                 $run = mysqli_query($db_server, $query);
         
                                 if(!$run) die (mysqli_error($db_server));

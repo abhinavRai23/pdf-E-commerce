@@ -22,26 +22,15 @@
             session_start();
             $_SESSION['id']=$row[0];
             $_SESSION['username']=$row[1];
-
-                $query1 = "SELECT user_type FROM user WHERE username='$username' AND password='$pass'";
-                $run1 = mysqli_query($db_server, $query1);
-
-                if(!$run1) die (mysqli_error($db_server));
-                // echo "Fuck you".$username;
-                $rows1=mysqli_num_rows($run1);
-                if($rows1!=0)
-                {           
-                    $row1 = mysqli_fetch_row($run1);
-                    $user_type = $row1[0];
-                }
-                if($user_type==0)
-                    header("location:donation.php");
-                else            
-                    header("location:home.php");
+            $_SESSION['user_type']= $row[5];
+            if($row[5]==0)
+                header("location:include/logout.php");
+            else            
+                header("location:home.php");
         }   
         else
         {
-                    header("location:index.php");
+            header("location:index.php");
         }
     }   
     else{ 

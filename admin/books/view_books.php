@@ -35,11 +35,9 @@
                 <tbody>
 
                     <?php
-                        $query = "SELECT `category_id`, `category_name` from categories";
+                        $query = "SELECT `category_id`, `category_name` from categories where parent_category!=0";
                         $cat_run = mysqli_query($db_server, $query);
-
                         if(!$cat_run) die (mysqli_error($db_server));
-
                         $catg=mysqli_fetch_all($cat_run);
 
                         $query = "SELECT * FROM `books` ORDER BY `title` ASC";
@@ -73,6 +71,10 @@
                                                 <tr>
                                                     <td>Author</td>
                                                     <td>'.$row["author"].'</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Publisher Name</td>
+                                                    <td>'.$row["publisher_name"].'</td>
                                                 </tr>
                                                 <tr>
                                                     <td>ISBN</td>

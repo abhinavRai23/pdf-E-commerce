@@ -16,7 +16,7 @@
             <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user">&nbsp;</i><?php echo $user; ?><b class="caret"></b></a>
             <ul class="dropdown-menu">
                 <li>
-                    <a href="include/logout.php"><i class="fa fa-fw fa-power-off"></i> Log Out</a>
+                    <a href="<?php echo 'http://'.$_SERVER['HTTP_HOST'].'/admin/include/logout.php';?>" ><i class="fa fa-fw fa-power-off"></i> Log Out</a>
                 </li>
             </ul>
         </li>

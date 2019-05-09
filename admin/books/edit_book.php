@@ -41,6 +41,7 @@
     if( isset($_POST["title"])
         && isset($_POST["book_id"])
         && isset($_POST["author"])
+        && isset($_POST["publisher_name"])
         && isset($_POST["isbn"])
         && isset($_FILES["poster"])
         && isset($_POST["category_id"])
@@ -54,6 +55,7 @@
         $title = mysql_entities_fix_string($db_server, $_POST["title"]);
         $book_id = mysql_entities_fix_string($db_server, $_POST["book_id"]);
         $author = mysql_entities_fix_string($db_server, $_POST["author"]);
+        $publisher_name = mysql_entities_fix_string($db_server, $_POST["publisher_name"]);
         $isbn = mysql_entities_fix_string($db_server, $_POST["isbn"]);
         $poster = mysql_entities_fix_string($db_server, $_FILES["poster"]["name"]);
         $category_id = mysql_entities_fix_string($db_server, $_POST["category_id"]);
@@ -77,10 +79,10 @@
         }
 
         if($file_error==0){
-            $query = "INSERT into books (title, author, isbn, poster, category_id, book_desc, published_date, sample_pdf_book, price, pdf_book, no_of_pages) values ( '$title', '$author', '$isbn', '$poster', '$category_id', '$book_desc', '$published_date', '$sample_pdf_book', '$price', '$pdf_book', '$no_of_pages' )";
             $query = "UPDATE books SET 
                 title='$title', 
-                author='$author', 
+                author='$author',
+                publisher_name = '$publisher_name'
                 poster='$poster',
                 category_id='$category_id', 
                 book_desc='$book_desc', 
@@ -131,6 +133,9 @@
                     </div>
                     <div class="col-md-6 form-group">
                         Author*:<input class="form-control" placeholder="Author Name" value='<?php echo $row["author"]; ?>' name="author" type="varchar" required>
+                    </div>
+                    <div class="col-md-6 form-group">
+                        Publisher Name*:<input class="form-control" placeholder="Publisher Name" value='<?php echo $row["publisher_name"]; ?>' name="publisher_name" type="varchar" required>
                     </div>
                     <input class="form-control" placeholder="ISBN code" value='<?php echo $row["isbn"]; ?>' name="isbn" type="hidden" required>
                     <div class="col-md-6 form-group">
