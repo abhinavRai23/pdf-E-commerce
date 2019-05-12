@@ -8,18 +8,25 @@ include "includes/header.php";
     if(!$cat_run) die (mysqli_error($db_server));
     $catg=mysqli_fetch_all($cat_run);
 
-    if( isset($_GET['category']) && isset($_POST['sort'])){
+    $type_of_sorting = [
+        "book_id" => "DESC",
+        "title" => "ASC",
+        "price" => "ASC",
+        "author" => "ASC"
+    ];
+
+    if( isset($_GET['category']) && isset($_GET['sort'])){
         $category_id = mysql_entities_fix_string($db_server, $_GET["category"]);
-        $sort = mysql_entities_fix_string($db_server, $_post["sort"]);
-        $query = "SELECT * FROM `books` where category_id='$category_id' ORDER BY '$sort' ASC";
+        $sort = mysql_entities_fix_string($db_server, $_GET["sort"]);
+        $query = "SELECT * FROM `books` where category_id='$category_id' ORDER BY '$sort' $type_of_sorting[$sort]";
     }
     else if( isset($_GET['category']) ){
         $category_id = mysql_entities_fix_string($db_server, $_GET["category"]);
         $query = "SELECT * FROM `books` where category_id='$category_id' ORDER BY 'title' ASC";
     }
-    else if( isset($_POST['sort']) ){
-        $sort = mysql_entities_fix_string($db_server, $_post["sort"]);
-        $query = "SELECT * FROM `books` ORDER BY '$sort' ASC";
+    else if( isset($_GET['sort']) ){
+        $sort = mysql_entities_fix_string($db_server, $_GET["sort"]);
+        $query = "SELECT * FROM `books` ORDER BY '$sort' $type_of_sorting[$sort]";
     }
     else{
         $query = "SELECT * FROM `books` ORDER BY `title` ASC";        
@@ -101,9 +108,10 @@ include "includes/header.php";
         </div>
         <div class="col-sm-9 col-md-9">
             <div class="row book-desc-bg">
-                <div class="col-md-9 "><span class="pad-right20">Sort By:</span> <a href="" class="sort-by">Title</a>
-                    | <a href="" class="sort-by">Price</a>
-                    | <a href="" class="sort-by">Author</a> | <a href="" class="sort-by">Recent</a></div>
+                <div class="col-md-9 "><span class="pad-right20">Sort By:</span> <a href="?sort=title" class="sort-by">Title</a>
+                    | <a href="?sort=price" class="sort-by">Price</a>
+                    | <a href="?sort=author" class="sort-by">Author</a> 
+                    | <a href="?sort=book_id" class="sort-by">Recent</a></div>
                 <div class="col-md-3 ">Showing <?php echo $book_rows." ".($book_rows!=1?"Books": "Book"); ?> </div>
                 <hr class="line">
                 <?php
