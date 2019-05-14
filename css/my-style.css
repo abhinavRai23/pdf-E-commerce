@@ -535,6 +535,13 @@ margin-left: 15%;}
 
 /*----why choose us section--*/
 
+
+
+
+
+
+
+
 /*--------------------------------------------------*/
 
 .our_feature_area {
@@ -716,7 +723,9 @@ margin-left: 15%;}
   padding: 3px;
 }
 
-
+.book-desc-bg .prize{
+  padding:5px 0px; text-align: center;
+}
 
 .catalogue{height: 50px; background-color: #fbc356;
 color:#8e2724; padding: 8px 10px;}
@@ -1511,9 +1520,29 @@ color:#8e2724; padding: 8px 10px;}
   background-color: #8e2724;
   color: #fff;
   text-decoration: none;
+  display: inline-block;
 }
 
 .contact-sec-btn:hover {
+  text-decoration: none;
+  color: #8e2724;
+  background-color: #fbc356;
+  transition: all 0.5s linear 0.2ms;
+  border: solid #fff 1px;
+}
+
+.addto-cart-btn {
+  padding: 10px;
+  border: solid #fff 1px;
+  height: 40px;
+  width: 150px;
+  background-color: #8e2724;
+  color: #fff;
+  text-decoration: none;
+  display: inline-block;
+}
+
+.addto-cart-btn:hover {
   text-decoration: none;
   color: #8e2724;
   background-color: #fbc356;
@@ -1948,3 +1977,22 @@ label {
     z-index: 2;
   }
 }
+
+
+
+
+/*------add to cart section code start---------*/
+
+.badge-notify{
+  background:#8e2724;
+  position:relative;
+  top: -20px;
+  right: 10px;
+  border: solid 2px #ffffff;
+}
+.my-cart-icon-affix {
+  position: fixed;
+  z-index: 999;
+}
+
+/*------ add to cart section code end------*/
