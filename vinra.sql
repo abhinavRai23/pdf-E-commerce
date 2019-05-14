@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: May 05, 2019 at 08:28 PM
+-- Generation Time: May 12, 2019 at 09:32 AM
 -- Server version: 5.7.24
 -- PHP Version: 7.2.14
 
@@ -33,10 +33,11 @@ CREATE TABLE IF NOT EXISTS `books` (
   `book_id` int(11) NOT NULL AUTO_INCREMENT,
   `title` varchar(50) NOT NULL,
   `author` varchar(30) NOT NULL,
+  `publisher_name` varchar(30) NOT NULL,
   `isbn` int(11) NOT NULL,
   `poster` varchar(50) NOT NULL,
   `category_id` int(11) NOT NULL,
-  `book_desc` varchar(100) NOT NULL,
+  `book_desc` varchar(1500) NOT NULL,
   `published_date` varchar(11) NOT NULL,
   `sample_pdf_book` varchar(50) NOT NULL,
   `price` int(11) NOT NULL,
@@ -44,14 +45,14 @@ CREATE TABLE IF NOT EXISTS `books` (
   `no_of_pages` int(11) NOT NULL,
   PRIMARY KEY (`book_id`),
   UNIQUE KEY `isbn` (`isbn`)
-) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4;
+) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `books`
 --
 
-INSERT INTO `books` (`book_id`, `title`, `author`, `isbn`, `poster`, `category_id`, `book_desc`, `published_date`, `sample_pdf_book`, `price`, `pdf_book`, `no_of_pages`) VALUES
-(3, 'Harry putter', 'abhinav', 98765, '5ca40808c52f70e05f59d731f7a6c95c.jpg', 1, 'hello its a book', '2019-04-06', 'you-don-t-know-js.pdf', 9899, 'the-tipping-point.pdf', 222);
+INSERT INTO `books` (`book_id`, `title`, `author`, `publisher_name`, `isbn`, `poster`, `category_id`, `book_desc`, `published_date`, `sample_pdf_book`, `price`, `pdf_book`, `no_of_pages`) VALUES
+(1, 'iRobot', 'someone', 'annonymous', 12345, '5ca40808c52f70e05f59d731f7a6c95c.jpg', 6, 'why up dude', '2019-05-01', 'Clean_Code.pdf', 400000, 'outliers-the_story_of_success.pdf', 2300);
 
 -- --------------------------------------------------------
 
@@ -136,7 +137,7 @@ CREATE TABLE IF NOT EXISTS `user` (
   `email_id` varchar(30) COLLATE latin1_spanish_ci NOT NULL,
   `user_type` int(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1 COLLATE=latin1_spanish_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1 COLLATE=latin1_spanish_ci;
 
 --
 -- Dumping data for table `user`
@@ -146,7 +147,8 @@ INSERT INTO `user` (`user_id`, `username`, `password`, `contact_no`, `email_id`,
 (1, 'Abhinav Rai', 'abhinav', '8743960158', 'raiabhinavrai1994@gmail.com', 1),
 (2, 'Akash Gautam', 'Akash', '8743960158', 'abc@xyz.com', 0),
 (3, 'admin', 'admin', '1234567890', 'admin@gmail.com', 1),
-(4, 'user', 'user', '9876543210', 'user@gmail.com', 0);
+(4, 'user', 'user', '9876543210', 'user@gmail.com', 0),
+(7, 'verma', 'qwerty', '9233333333', 'verma@gmail.com', 0);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

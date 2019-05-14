@@ -78,7 +78,6 @@
 
         if($file_error==0){
             $query = "INSERT into books (title, author, publisher_name, isbn, poster, category_id, book_desc, published_date, sample_pdf_book, price, pdf_book, no_of_pages) values ( '$title', '$author', '$publisher_name', '$isbn', '$poster', '$category_id', '$book_desc', '$published_date', '$sample_pdf_book', '$price', '$pdf_book', '$no_of_pages' )";
-            var_dump($query);
             
             $run = mysqli_query($db_server, $query);
 

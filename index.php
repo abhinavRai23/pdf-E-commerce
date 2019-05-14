@@ -1,5 +1,32 @@
 <?php
     include "includes/header.php";
+    include "includes/send_mail.php";
+
+    if(
+        isset($_POST["fname"]) &&
+        isset($_POST["lname"]) &&
+        isset($_POST["email"]) &&
+        isset($_POST["mobile"]) &&
+        isset($_POST["msg"]) &&
+        isset($_FILES["upload"])
+    ){
+        $fname = mysql_entities_fix_string($db_server, $_POST["fname"]);
+        $lname = mysql_entities_fix_string($db_server, $_POST["lname"]);
+        $email = mysql_entities_fix_string($db_server, $_POST["email"]);
+        $mobile = mysql_entities_fix_string($db_server, $_POST["mobile"]);
+        $msg = mysql_entities_fix_string($db_server, $_POST["msg"]);
+        $name = $fname." ".$lname;
+        $subject = "Contact Request from $name ($mobile)";
+        $msg = "<p>Hi <b>$name</b>, is trying to contact with mobile no $mobile and email-id $email.<br/></p>
+                <p><b>Message:-</b>$msg</p>";
+        $ext = pathinfo($_FILES["upload"]["name"], PATHINFO_EXTENSION);
+        if( array_search($ext, ["doc", "pdf", "docx", "rtf"]) ){
+            send_mail( $subject, $msg, $_FILES["upload"] );
+        }
+        else{
+            echo "<div style='font-weight:bold; color: red; text-align: center'>*Invalid file format</div>";
+        }
+    }
 ?>
 
 <!-- Jssor Slider Begin -->
@@ -153,7 +180,7 @@
                         </div>
                         <div class="modal-body">
                             <div class="row">
-                                <form name="publish-form" method="post" action="">
+                                <form name="publish-form" method="post" action="" enctype="multipart/form-data">
                                     <fieldset>
                                         <legend>Publish with us</legend>
                                         <p>We welcome quality content and invite authors to publish with us. In case you
@@ -178,7 +205,7 @@
                                             </div>
                                             <div class="col-lg-offset-0 col-lg-6 col-sm-12">
                                                 <div class="form-group"><label for="phone">Cell Phone</label>
-                                                    <input type="number" class="form-control"
+                                                    <input type="number" class="form-control" max="9999999999"
                                                         placeholder="(999) 999-9999" name="mobile" required />
                                                 </div>
                                             </div>
@@ -188,32 +215,29 @@
                                                         name="email" required />
                                                 </div>
                                             </div>
-                                            <div class="col-sm-12">
-                                                <div class="form-group"><label for="address">Address</label>
-                                                    <input type="text" class="form-control" placeholder="Address"
-                                                        name="address" required />
+                                            <div class="col-lg-offset-0 col-lg-12 col-sm-12">
+                                                <div class="form-group"><label for="comment">Your Message</label>
+                                                    <textarea class="form-control" rows="5" name="msg"></textarea>
                                                 </div>
                                             </div>
                                             <div class="col-lg-offset-0 col-lg-6 col-sm-12">
                                                 <div class="form-group"><label for="upload">Upload Synopsis</label>
 
-                                                    <input type="file" name="upload-file" /><br />
+                                                    <input type="file" name="upload" /><br />
                                                     <p class="note-text">* Only DOC, DOCX, RTF, PDF File can be uploaded
                                                     </p>
                                                 </div>
                                             </div>
 
-                                            <div class="col-sm-12">
+                                            <!-- <div class="col-sm-12">
                                                 <p>Or</p>
                                                 <div class="form-group"><label for="comment">Write Synopsis</label>
                                                     <textarea class="form-control" rows="4" name="synopsis"></textarea>
                                                 </div>
-                                            </div>
+                                            </div> -->
                                             <div class="col-lg-offset-0 col-lg-12 col-sm-12">
                                                 <div class="form-group">
-                                                    <a href=""><button class="button" name="submit"
-                                                            type="button"><span>Submit
-                                                            </span></button></a>
+                                                    <input type="submit" class="button" name="submit"/>
                                                 </div>
                                             </div>
 

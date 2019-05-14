@@ -3,45 +3,45 @@ use PHPMailer\PHPMailer\PHPMailer;
 
 require 'PHPMailer/PHPMailer.php';
 require 'PHPMailer/SMTP.php';
+require 'PHPMailer/Exception.php';
 
-$mail = new PHPMailer(true);
+function send_mail($subject, $body, $attachment = "")
+{
+    $mail = new PHPMailer(true);
+    $mail->SMTPDebug = 0;                                       // Enable verbose debug output
+    $mail->isSMTP();                                            // Set mailer to use SMTP
+    $mail->Host       = 'smtp.rediffmailpro.com';  // Specify main and backup SMTP servers
+    $mail->SMTPAuth   = true;                                   // Enable SMTP authentication
+    $mail->Username   = 'info@vinra.co.in';                     // SMTP username
+    $mail->Password   = 'Vinra@2019';                               // SMTP password
+    $mail->SMTPSecure = 'tls';                                  // Enable TLS encryption, `ssl` also accepted
+    $mail->Port       = 587;                                    // TCP port to connect to
 
-$name = "manish";
-$email = "manish@afinoz.com";
-$subject = "LOL";
-$body = "WhatEver it takes";
-$attachment = "";
+    //Recipients
+    $mail->setFrom('info@vinra.co.in', 'Vinra-Mailer');
 
-$mail->SMTPDebug = 0;                                       // Enable verbose debug output
-$mail->isSMTP();                                            // Set mailer to use SMTP
-$mail->Host       = 'ssl://smtp.gmail.com';  // Specify main and backup SMTP servers
-$mail->SMTPAuth   = true;                                   // Enable SMTP authentication
-$mail->Username   = 'info@vinra.co.in';                     // SMTP username
-$mail->Password   = 'password';                               // SMTP password
-$mail->SMTPSecure = 'ssl';                                  // Enable TLS encryption, `ssl` also accepted
-$mail->Port       = 465;                                    // TCP port to connect to
+    $mail->addAddress("info@vinra.co.in", "Gopal Kumar");     // Add a recipient
+    // $mail->addAddress('ellen@example.com');               // Name is optional
+    // $mail->addReplyTo('info@example.com', 'Information');
+    $mail->addCC('yourmanish_123@yahoo.com');
+    $mail->addBCC('raiabhinavrai1994@gmail.com');
 
-//Recipients
-$mail->setFrom('info@vinra.co.in', 'vinra');
+    // Attachments
+    if ($attachment){
+        $mail->addAttachment($attachment['tmp_name'], $attachment["name"]);         // Add attachments
+    }
+    // $mail->addAttachment('/tmp/image.jpg', 'new.jpg');    // Optional name
 
-$mail->addAddress( $email, $name);     // Add a recipient
-// $mail->addAddress('ellen@example.com');               // Name is optional
-// $mail->addReplyTo('info@example.com', 'Information');
-// $mail->addCC('cc@example.com');
-// $mail->addBCC('bcc@example.com');
+    // Content
+    $mail->isHTML(true);                                  // Set email format to HTML
+    $mail->Subject = $subject;
+    $mail->Body = $body;
 
-// Attachments
-if($attachment)
-    $mail->addAttachment($attachment);         // Add attachments
-// $mail->addAttachment('/tmp/image.jpg', 'new.jpg');    // Optional name
-
-// Content
-$mail->isHTML(true);                                  // Set email format to HTML
-$mail->Subject = $subject;
-$mail->Body    = $body;
-
-if (!$mail->send()) {
-    echo "Mailer Error: " . $mail->ErrorInfo;
-} else {
-    echo 'Mail Sent Successfully';
+    if (!$mail->send()) {
+        echo "Mailer Error: " . $mail->ErrorInfo;
+        return false;
+    } else {
+        echo 'Mail Sent Successfully';
+        return true;
+    }
 }
