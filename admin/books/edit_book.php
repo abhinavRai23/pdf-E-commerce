@@ -33,14 +33,27 @@ if (
 
     $file_error = 0;
 
-    $file_error += file_upload($_FILES["poster"], "poster", (2 * 1024 * 1024));
-    $file_error += file_upload($_FILES["pdf_book"], "pdf_book", (2000 * 1024 * 1024));
+    try{
+        if(!file_upload($_FILES["poster"], "poster", (2 * 1024 * 1024))){
+            $file_error++;
+        }
+        if(!file_upload($_FILES["pdf_book"], "pdf_book", (2000 * 1024 * 1024))){
+            $file_error++;
+        }
 
-    if (isset($_FILES["sample_pdf_book"])) {
-        $sample_pdf_book = mysql_entities_fix_string($db_server, $_FILES["sample_pdf_book"]["name"]);
-        $file_error += file_upload($_FILES["sample_pdf_book"], "sample_pdf_book", (100 * 1024 * 1024));
-    } else {
-        $sample_pdf_book = "";
+        if (isset($_FILES["sample_pdf_book"])) {
+            $sample_pdf_book = mysql_entities_fix_string($db_server, $_FILES["sample_pdf_book"]["name"]);
+            
+            if( !file_upload($_FILES["sample_pdf_book"], "sample_pdf_book", (100 * 1024 * 1024))){
+                $file_error++;
+            }
+            
+        } else {
+            $sample_pdf_book = "";
+        }
+    }
+    catch(Exception $e){
+        echo $e->getMessage();
     }
 
     if ($file_error == 0) {
