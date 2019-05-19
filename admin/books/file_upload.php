@@ -1,6 +1,6 @@
 <?php
 
-function file_upload( $file, $file_name, $max_file_size, $isbn){
+function file_upload( $file, $file_name, $max_file_size){
         $target_dir = $_SERVER['DOCUMENT_ROOT'].'/uploads/'.$file_name.'/';
         $target_file = $target_dir . basename($file["name"]);
         $uploadOk = 1;
