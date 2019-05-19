@@ -1,40 +1,6 @@
 <?php
     include "../include/header.php";
-
-    function file_upload( $file, $file_name, $max_file_size, $isbn){
-        $target_dir = $_SERVER['DOCUMENT_ROOT'].'/uploads/'.$file_name.'/';
-        $target_file = $target_dir . basename($file["name"]);
-        $uploadOk = 1;
-        $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
-        // Check if file already exists
-        // if (file_exists($target_file)) {
-        //     echo "Sorry, file already exists.<br>";
-        //     $uploadOk = 0;
-        // }
-        // Check file size
-        if ($file["size"] > $max_file_size) {
-            echo "Sorry, your file is too large.<br>";
-            $uploadOk = 0;
-        }
-
-        // Allow certain file formats
-        if($file_name=="poster" && ( $imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg" )) {
-            echo "Sorry, only JPG, JPEG & PNG files are allowed.<br/>";
-            $uploadOk = 0;
-        }else if($file_name!="poster" && $imageFileType!='pdf'){
-            echo $file_name." ".$imageFileType."<br>";
-            echo "Sorry, expectred pdf file.<br/>";
-            $uploadOk = 0;
-        }
-        // Check if $uploadOk is set to 0 by an error
-        if ($uploadOk == 0) {
-            return 1;
-        // if everything is ok, try to upload file
-        } else {
-            move_uploaded_file($file["tmp_name"], $target_file);
-            return 0;
-        }
-    }
+    require "./file_upload.php";
 ?>
 
 <?php
@@ -68,14 +34,13 @@
         $file_error += file_upload($_FILES["poster"], "poster", (2*1024*1024), $isbn );
         $file_error += file_upload($_FILES["pdf_book"], "pdf_book", (2000*1024*1024), $isbn );
 
-        if( $_FILES["sample_pdf_book"]["size"]!=0 ){
+        if( isset($_FILES["sample_pdf_book"]) ){
             $sample_pdf_book = mysql_entities_fix_string($db_server, $_FILES["sample_pdf_book"]["name"]);
             $file_error += file_upload($_FILES["sample_pdf_book"], "sample_pdf_book", (100*1024*1024), $isbn );
         }   
         else{
             $sample_pdf_book = "";
         }
-
         if($file_error==0){
             $query = "INSERT into books (title, author, publisher_name, isbn, poster, category_id, book_desc, published_date, sample_pdf_book, price, pdf_book, no_of_pages) values ( '$title', '$author', '$publisher_name', '$isbn', '$poster', '$category_id', '$book_desc', '$published_date', '$sample_pdf_book', '$price', '$pdf_book', '$no_of_pages' )";
             
@@ -150,7 +115,7 @@
                         Book Description: <textarea class="form-control" rows="3" placeholder="Enter book description" name="book_desc" required></textarea>
                     </div>
                     <div class="col-md-6 form-group">
-                        Sample Book(PDF): <input type="file" name="sample_pdf_book">
+                        Sample Book(PDF): <input type="file" name="sample_pdf_book" >
                     </div>
                     <div class="col-md-6 form-group">
                         Main Book(PDF): <input type="file" name="pdf_book" required>

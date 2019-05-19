@@ -1,88 +1,53 @@
 <?php
-    include "../include/header.php";
-
-    function file_upload( $file, $file_name, $max_file_size, $isbn){
-        $target_dir = $_SERVER['DOCUMENT_ROOT'].'/uploads/'.$file_name.'/';
-        $target_file = $target_dir . basename($file["name"]);
-        $uploadOk = 1;
-        $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
-        // Check if file already exists
-        // if (file_exists($target_file)) {
-        //     echo "Sorry, file already exists.<br>";
-        //     $uploadOk = 0;
-        // }
-        // Check file size
-        if ($file["size"] > $max_file_size) {
-            echo "Sorry, your file is too large.<br>";
-            $uploadOk = 0;
-        }
-
-        // Allow certain file formats
-        if($file_name=="poster" && ( $imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg" )) {
-            echo "Sorry, only JPG, JPEG & PNG files are allowed.<br/>";
-            $uploadOk = 0;
-        }else if($file_name!="poster" && $imageFileType!='pdf'){
-            echo $file_name." ".$imageFileType."<br>";
-            echo "Sorry, expectred pdf file.<br/>";
-            $uploadOk = 0;
-        }
-        // Check if $uploadOk is set to 0 by an error
-        if ($uploadOk == 0) {
-            return 1;
-        // if everything is ok, try to upload file
-        } else {
-            move_uploaded_file($file["tmp_name"], $target_file);
-            return 0;
-        }
-    }
+include "../include/header.php";
+require "./file_upload.php";
 ?>
 
 <?php
-    if( isset($_POST["title"])
-        && isset($_POST["book_id"])
-        && isset($_POST["author"])
-        && isset($_POST["publisher_name"])
-        && isset($_POST["isbn"])
-        && isset($_FILES["poster"])
-        && isset($_POST["category_id"])
-        && isset($_POST["book_desc"])
-        && isset($_POST["published_date"])
-        && isset($_POST["price"])
-        && isset($_FILES["pdf_book"])
-        && isset($_POST["no_of_pages"])
-    )
-    {
-        $title = mysql_entities_fix_string($db_server, $_POST["title"]);
-        $book_id = mysql_entities_fix_string($db_server, $_POST["book_id"]);
-        $author = mysql_entities_fix_string($db_server, $_POST["author"]);
-        $publisher_name = mysql_entities_fix_string($db_server, $_POST["publisher_name"]);
-        $isbn = mysql_entities_fix_string($db_server, $_POST["isbn"]);
-        $poster = mysql_entities_fix_string($db_server, $_FILES["poster"]["name"]);
-        $category_id = mysql_entities_fix_string($db_server, $_POST["category_id"]);
-        $book_desc = mysql_entities_fix_string($db_server, $_POST["book_desc"]);
-        $published_date = mysql_entities_fix_string($db_server, $_POST["published_date"]);
-        $price = mysql_entities_fix_string($db_server, $_POST["price"]);
-        $pdf_book = mysql_entities_fix_string($db_server, $_FILES["pdf_book"]["name"]);
-        $no_of_pages = mysql_entities_fix_string($db_server, $_POST["no_of_pages"]);
+if (
+    isset($_POST["title"])
+    && isset($_POST["book_id"])
+    && isset($_POST["author"])
+    && isset($_POST["publisher_name"])
+    && isset($_POST["isbn"])
+    && isset($_FILES["poster"])
+    && isset($_POST["category_id"])
+    && isset($_POST["book_desc"])
+    && isset($_POST["published_date"])
+    && isset($_POST["price"])
+    && isset($_FILES["pdf_book"])
+    && isset($_POST["no_of_pages"])
+) {
+    $title = mysql_entities_fix_string($db_server, $_POST["title"]);
+    $book_id = mysql_entities_fix_string($db_server, $_POST["book_id"]);
+    $author = mysql_entities_fix_string($db_server, $_POST["author"]);
+    $publisher_name = mysql_entities_fix_string($db_server, $_POST["publisher_name"]);
+    $isbn = mysql_entities_fix_string($db_server, $_POST["isbn"]);
+    $poster = mysql_entities_fix_string($db_server, $_FILES["poster"]["name"]);
+    $category_id = mysql_entities_fix_string($db_server, $_POST["category_id"]);
+    $book_desc = mysql_entities_fix_string($db_server, $_POST["book_desc"]);
+    $published_date = mysql_entities_fix_string($db_server, $_POST["published_date"]);
+    $price = mysql_entities_fix_string($db_server, $_POST["price"]);
+    $pdf_book = mysql_entities_fix_string($db_server, $_FILES["pdf_book"]["name"]);
+    $no_of_pages = mysql_entities_fix_string($db_server, $_POST["no_of_pages"]);
 
-        $file_error = 0;
+    $file_error = 0;
 
-        $file_error += file_upload($_FILES["poster"], "poster", (2*1024*1024), $isbn );
-        $file_error += file_upload($_FILES["pdf_book"], "pdf_book", (2000*1024*1024), $isbn );
+    $file_error += file_upload($_FILES["poster"], "poster", (2 * 1024 * 1024), $isbn);
+    $file_error += file_upload($_FILES["pdf_book"], "pdf_book", (2000 * 1024 * 1024), $isbn);
 
-        if( $_FILES["sample_pdf_book"]["size"]!=0 ){
-            $sample_pdf_book = mysql_entities_fix_string($db_server, $_FILES["sample_pdf_book"]["name"]);
-            $file_error += file_upload($_FILES["sample_pdf_book"], "sample_pdf_book", (100*1024*1024), $isbn );
-        }   
-        else{
-            $sample_pdf_book = "";
-        }
+    if (isset($_FILES["sample_pdf_book"])) {
+        $sample_pdf_book = mysql_entities_fix_string($db_server, $_FILES["sample_pdf_book"]["name"]);
+        $file_error += file_upload($_FILES["sample_pdf_book"], "sample_pdf_book", (100 * 1024 * 1024), $isbn);
+    } else {
+        $sample_pdf_book = "";
+    }
 
-        if($file_error==0){
-            $query = "UPDATE books SET 
+    if ($file_error == 0) {
+        $query = "UPDATE books SET 
                 title='$title', 
                 author='$author',
-                publisher_name = '$publisher_name'
+                publisher_name = '$publisher_name',
                 poster='$poster',
                 category_id='$category_id', 
                 book_desc='$book_desc', 
@@ -91,16 +56,16 @@
                 price='$price', 
                 pdf_book='$pdf_book',
                 no_of_pages='$no_of_pages' 
-                WHERE book_id=$book_id ";
-            
-            $run = mysqli_query($db_server, $query);
+                WHERE book_id='$book_id'";
 
-            if(!$run) die (mysqli_error($db_server));
-            else{
-                header("location:view_books.php");
-            }
+        $run = mysqli_query($db_server, $query);
+
+        if (!$run) die(mysqli_error($db_server));
+        else {
+            header("location:view_books.php");
         }
     }
+}
 ?>
 
 <div class="page-header">
@@ -113,19 +78,17 @@
             <form role="form" method="post" enctype="multipart/form-data">
                 <fieldset>
                     <?php
-                        $isbn = mysql_entities_fix_string($db_server, $_GET["isbn"]);
-                        $query = "SELECT * FROM `books` where isbn='$isbn'";
+                    $isbn = mysql_entities_fix_string($db_server, $_GET["isbn"]);
+                    $query = "SELECT * FROM `books` where isbn='$isbn'";
 
-                        $run = mysqli_query($db_server, $query);
-                        if(!$run) die (mysqli_error($db_server));
-                        $rows=mysqli_num_rows($run);
-                        if($rows>0)
-                        {
-                            $row = mysqli_fetch_assoc($run);
-                        }
-                        else{
-                            header("location:view_books.php");
-                        }
+                    $run = mysqli_query($db_server, $query);
+                    if (!$run) die(mysqli_error($db_server));
+                    $rows = mysqli_num_rows($run);
+                    if ($rows > 0) {
+                        $row = mysqli_fetch_assoc($run);
+                    } else {
+                        header("location:view_books.php");
+                    }
                     ?>
                     <input value='<?php echo $row["book_id"]; ?>' name="book_id" type="hidden" required>
                     <div class="col-md-6 form-group">
@@ -142,24 +105,23 @@
                         Choose Category:<select class="form-control" value='<?php echo $row["category_id"]; ?>' name="category_id" type="select" required>
                             <option value="" disabled>Choose</option>
                             <?php
-                                $query = "SELECT * FROM `categories`";
-                                $run = mysqli_query($db_server, $query);
-        
-                                if(!$run) die (mysqli_error($db_server));
-        
-                                $rows=mysqli_num_rows($run);
-        
-                                if($rows>0)
-                                {
-                                    while($sub_row = mysqli_fetch_assoc($run)){
-                            ?>
+                            $query = "SELECT * FROM `categories` where parent_category!=0";
+                            $run = mysqli_query($db_server, $query);
+
+                            if (!$run) die(mysqli_error($db_server));
+
+                            $rows = mysqli_num_rows($run);
+
+                            if ($rows > 0) {
+                                while ($sub_row = mysqli_fetch_assoc($run)) {
+                                    ?>
                                     <option value="<?php echo $sub_row["category_id"]; ?>">
                                         <?php echo $sub_row["category_name"]; ?>
                                     </option>
-                            <?php
-                                    }
-                                }
-                            ?>
+                                <?php
+                            }
+                        }
+                        ?>
                         </select>
                     </div>
                     <div class="col-md-6 form-group">
@@ -191,6 +153,6 @@
         <!-- /.panel-body -->
     </div>
 </div>
-<?php 
-    include "../include/footer.php";
+<?php
+include "../include/footer.php";
 ?>
