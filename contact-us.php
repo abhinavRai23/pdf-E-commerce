@@ -18,7 +18,12 @@
         $subject = "Contact Request from $name ($mobile)";
         $msg = "<p>Hi <b>$name</b>, is trying to contact with mobile no $mobile and email-id $email.<br/></p>
                 <p><b>Message:-</b>$msg</p>";
-        send_mail( $subject , $msg );
+                
+        try{
+            send_mail( $subject , $msg );
+        }catch(Exception $e){
+            echo 'Message: ' .$e->getMessage();
+        }
     }
 
 ?>
