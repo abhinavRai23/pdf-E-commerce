@@ -24,7 +24,7 @@
         <div class="row">
             <div class="row book-desc-bg">
                 <div class="col-md-3 pad-top20">
-                    <img src="/uploads/poster/<?php echo $row["poster"]; ?>" height="240px" width="180px" />
+                    <img src="/uploads/poster/<?php echo $row["poster"]; ?>" height="240px" width="100%" />
                 </div>
                 <div class="col-md-9 pad-top20">
                     <h4><?php echo $row["title"]; ?></h4>

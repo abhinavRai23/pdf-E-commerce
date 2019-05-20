@@ -1,5 +1,5 @@
 <?php
-	$prod = false;
+	$prod = true;
 	$db_hostname = $prod ? '182.50.133.88:3306' : 'localhost';
 	$db_database = $prod ? 'ph16722039727_vinra' : 'vinra';
 	$db_username =  $prod ? 'vinra' : 'root';

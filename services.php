@@ -53,7 +53,7 @@
                             <li role="presentation" class="brand-nav"><a href="#tab8" aria-controls="tab8" role="tab"
                                     data-toggle="tab"><img src="Images/service-icon/Proceedings.png" height="30"
                                         width="28" /> &nbsp;Proceedings</a></li>
-                            <li role="presentation" class="brand-nav"><a href="#tab9" aria-controls="tab9" role="tab"
+                            <li role="presentation" class="brand-nav"><a href="edu-tab.php #tab9" aria-controls="tab9" role="tab"
                                     data-toggle="tab"><img src="Images/service-icon/EduTab.png" height="30"
                                         width="28" />
                                     &nbsp;Edu-Tab</a></li>
@@ -707,7 +707,7 @@
                         <div class="panel-heading" role="tab" id="headingNine">
                             <h4 class="panel-title">
                                 <a class="collapsed" data-toggle="collapse" data-parent="#accordion"
-                                    href="#collapseNine" aria-expanded="false" aria-controls="collapseNine"><img
+                                    href="edu-tab.php #collapseNine" aria-expanded="false" aria-controls="collapseNine"><img
                                         src="Images/service-icon/EduTab.png" height="30" width="28" /> &nbsp;Edu-Tab</a>
                             </h4>
 

@@ -14,7 +14,7 @@ function send_mail($subject, $body, $attachment = "")
     $mail->SMTPAuth   = true;                                   // Enable SMTP authentication
     $mail->Username   = 'info@vinra.co.in';                     // SMTP username
     $mail->Password   = 'Vinra@2019';                               // SMTP password
-    $mail->SMTPSecure = 'tls';                                  // Enable TLS encryption, `ssl` also accepted
+    $mail->SMTPSecure = 'Tls';                                  // Enable TLS encryption, `ssl` also accepted
     $mail->Port       = 587;                                    // TCP port to connect to
 
     //Recipients
