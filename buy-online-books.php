@@ -17,7 +17,6 @@
         header("location:view_books.php");
     }
 ?>
-
 <div class="container">
     <hr class="line">
     <div class="width-60">
@@ -34,7 +33,7 @@
                         </span> | <span class="pad-left10 pad-right10">Rs. <?php echo $row["price"]; ?></span> | <span
                             class="pad-left10 pad-right10"><?php echo $row["published_date"]; ?></span></p>
                     <p><?php echo $row["book_desc"]; ?></p>
-                    <div class="contact-sec-btn center" style="display: inline-block;">Buy Now</div>
+                    <div class="contact-sec-btn center" style="display: inline-block;" onclick='addToCart()'>Buy Now</div>
                     <div class="contact-sec-btn center" style="display: inline-block;"><a href="/uploads/sample_pdf_book/<?php echo $row["sample_pdf_book"]; ?>" target="_blank" style="color: white; text-decoration: none">View Sample PDF</a></div>
                     <hr class="line">
 
@@ -43,7 +42,25 @@
         </div>
     </div>
 </div>
-
+<script type="application/javascript">
+    let poster = "<?php echo $row['poster'] ?>"
+    let title = "<?php echo $row['title'] ?>"
+    let price = "<?php echo $row['price'] ?>"
+    let ls = localStorage.getItem('cartBooks')
+    let books = {}
+    if(ls){
+        books = JSON.parse(ls)
+    }
+    books["<?php echo $row['isbn'] ?>"] = {
+        poster,
+        title,
+        price
+    }
+    function addToCart(){
+        localStorage.setItem('cartBooks', JSON.stringify(books) )
+        window.location = "/cart-view.php";
+    }
+</script>
 <?php
     include "includes/footer.php";
 ?>

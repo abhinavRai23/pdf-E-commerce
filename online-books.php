@@ -78,7 +78,7 @@ include "includes/header.php";
                                 $sub_content .= "<tr>
                                                     <td>
                                                         <span class='text-primary'></span>
-                                                            <a href='online-books?category=".$sub_row['category_id']."'>
+                                                            <a href='online-books.php?category=".$sub_row['category_id']."'>
                                                                 <i class='fa fa-square'></i>
                                                                 ".$sub_row['category_name']."
                                                             </a>

@@ -34,7 +34,6 @@
     <script type="text/javascript" src="js/mycustom.js"></script>
 
 </head>
-
 <body>
     <!-- Start Top Header_Area -->
     <section class="top-header">
@@ -55,7 +54,12 @@
                 </li>
 
             </ul>
-
+            <script>
+                let book = localStorage.getItem("cartBooks")
+                book = book && JSON.parse(book)
+                let cart_count = document.querySelector(".cart_div span")
+                cart_count.innerHTML = Object.keys(book).length
+            </script>
         </div>
     </section>
 

@@ -1,5 +1,4 @@
 <?php
-use PHPMailer\PHPMailer\Exception;
 
 function file_upload($file, $file_name, $max_file_size)
 {

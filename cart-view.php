@@ -35,35 +35,55 @@
                 <div class="">
                     <table class="table table-hover table-responsive" id="my-cart-table">
                         <tbody>
-                            <tr title="summary 1" data-id="1" data-price="10">
-                                <td class="text-center" style="width: 30px;"><img width="30px" height="30px" src="Images/124.jpeg"></td>
-                                <td>Raw (Romeo Akbar Walter)</td>
-                                <td title="Unit Price" class="text-right">₹400.00</td>
-                                <td title="Quantity">
-                                    <input type="number" min="1" style="width: 70px;" class="my-product-quantity" value="1"></td>
-                                <td title="Total" class="text-right my-product-total">₹ 400.00</td>
-                                <td title="Remove from Cart" class="text-center" style="width: 30px;"><a href="javascript:void(0);"
-                                        class="btn btn-xs btn-danger my-product-remove">X</a></td>
-                            </tr>
-                            <tr>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                            </tr>
-                            <tr>
-
-                                <td><strong>Total</strong></td>
-                                <td></td>
-                                <td class="text-right"><strong id="my-cart-grand-total">₹400.00</strong></td>
-                                <td></td>
-                                <td></td>
-
-                                <td></td>
-                            </tr>
-
+                            <script>
+                                let books = localStorage.getItem("cartBooks")
+                                let row, TotalCost, rest
+                                books = books && JSON.parse(books)
+                                function displayCart(){
+                                    row = ""
+                                    TotalCost=0
+                                    if(Object.keys(books).length!=0){
+                                        Object.keys(books).forEach( e=>{
+                                            row += `<tr><td class="text-center" style="width: 30px;"><img width="30px" height="30px" src="uploads/poster/${books[e].poster}"></td><td>${books[e].title}</td><td title="Total" class="text-right my-product-total">₹ ${books[e].price}</td><td title="Remove from Cart" class="text-center" style="width: 30px;"><a onclick="dropFromCart(${e})" class="btn btn-xs btn-danger my-product-remove">X</a></td></tr>`
+                                            TotalCost+=parseInt(books[e].price)
+                                        })
+                                    }
+                                    else{
+                                        row = "<tr><td colspan='4'><center style='color: red;'>*Nothing in Cart.<center></td></tr>";
+                                    }
+                                    rest = `
+                                    <tr>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td><strong>Total</strong></td>
+                                        <td class="text-right"><strong id="my-cart-grand-total"></strong></td>
+                                        <td></td>
+                                    </tr>
+                                    `
+                                    let table = document.querySelector('#my-cart-table>tbody')
+                                    table.innerHTML = row+rest;
+                                    setTimeout(()=>{
+                                        calculateTotal();
+                                    },100);
+                                }
+                                function dropFromCart(e){
+                                    delete books[e];
+                                    localStorage.setItem("cartBooks", JSON.stringify(books));
+                                    setTimeout(()=>{
+                                        displayCart()
+                                    },100)
+                                }
+                                function calculateTotal(){
+                                    let total = document.querySelector('#my-cart-grand-total')
+                                    total.innerHTML = "₹ " + TotalCost
+                                }
+                                displayCart()
+                            </script>
                         </tbody>
                     </table>
                 </div>
