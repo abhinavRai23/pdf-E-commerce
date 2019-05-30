@@ -10,21 +10,20 @@ function send_mail($subject, $body, $attachment = "")
     $mail = new PHPMailer(true);
     $mail->SMTPDebug = 0;                                       // Enable verbose debug output
     $mail->isSMTP();                                            // Set mailer to use SMTP
-    $mail->Host       = 'smtp.rediffmailpro.com';  // Specify main and backup SMTP servers
+    $mail->Host       = 'smtp.gmail.com';  // Specify main and backup SMTP servers
     $mail->SMTPAuth   = true;                                   // Enable SMTP authentication
-    $mail->Username   = 'info@vinra.co.in';                     // SMTP username
-    $mail->Password   = 'Vinra@9876';                               // SMTP password
-    $mail->SMTPSecure = 'tls';                                  // Enable TLS encryption, `ssl` also accepted
-    $mail->Port       = 587;                                    // TCP port to connect to
+    $mail->Username   = 'mail@from.com';                     // SMTP username
+    $mail->Password   = 'password';                               // SMTP password
+    $mail->SMTPSecure = 'ssl';                                  // Enable TLS encryption, `ssl` also accepted
+    $mail->Port       = 465;                                    // TCP port to connect to
 
     //Recipients
-    $mail->setFrom('info@vinra.co.in', 'Vinra-Mailer');
+    $mail->setFrom('mail@from.com', 'from guy');
 
-    $mail->addAddress("info@vinra.co.in", "Gopal Kumar");     // Add a recipient
+    $mail->addAddress("to@gmail.com", "to guy");     // Add a recipient
     // $mail->addAddress('ellen@example.com');               // Name is optional
     // $mail->addReplyTo('info@example.com', 'Information');
-    $mail->addCC('yourmanish_123@yahoo.com');
-    $mail->addBCC('raiabhinavrai1994@gmail.com');
+    $mail->addCC('mail_for@CC.com');
 
     // Attachments
     if ($attachment){
